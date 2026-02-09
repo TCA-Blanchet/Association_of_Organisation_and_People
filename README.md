@@ -11,4 +11,5 @@ onglet rgp
 Idée de projet:
 Carte stat inse comparatif population inter département
 recensement cartographique des AOP, Labels…
-# Cours interactif R soit tidyverse
+
+autre posibilité : Cours interactif R soit tidyverse
