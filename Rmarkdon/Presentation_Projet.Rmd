@@ -28,7 +28,10 @@ library(knitr)
 
 # Introduction
 
-
+Nous avons eut plusieurs idées d'application utilisant le module Shiny, nos trois idées se base sur une ou plusieurs cartes. 
+Notre première idée est la création d'une carte à l'échèlle française ou régional des différentes AOP ou label avec la possibilité d'obtenir plus amples informations en cliquant dessus. 
+Notre seconde idée est la représentation sur une carte de la france, d'une région ou d'un département d'information issu de l'insee avec ou sans traitement d'analyse.
+Notre troisième idée est la création d'une carte des évèments d'une ville ou d'un départment avec une barre de recherche par date ou type d'évènement ou lieux et une gestion de la temporalité
 
 ## Liens
 
