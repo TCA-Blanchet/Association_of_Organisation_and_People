@@ -32,11 +32,13 @@ fluidPage(
                  plotOutput("distPlot")
                  )
               ) # fermeture sidebarLayout
-    ),# fermeture tabPanel
+    ),# fermeture tabPanel1
+    
     tabPanel("Carte AOP",
              titlePanel("Carte Intéractive des AOP"),
              leafletOutput("map")
     ), 
+    
     tabPanel("About",
              titlePanel("L'Equipe")
     )
