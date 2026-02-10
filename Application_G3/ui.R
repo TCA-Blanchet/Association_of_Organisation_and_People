@@ -40,7 +40,14 @@ fluidPage(
     ), 
     
     tabPanel("About",
-             titlePanel("L'Equipe")
+             titlePanel("L'Equipe"),
+             fluidRow(column(width = 4),
+                      column(width = 2, offset = 3)),
+             fluidRow(column(width = 12)),
+             checkboxGroupInput("variable", "Variables to show:",
+                                c("Cylinders" = "cyl",
+                                  "Transmission" = "am",
+                                  "Gears" = "gear"))
     )
   )# fermeture tabsetPanel
 
