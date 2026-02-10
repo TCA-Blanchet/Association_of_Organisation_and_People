@@ -8,7 +8,7 @@ fluidPage(
   titlePanel("Carte des AOP Françaises"), 
   
   tabsetPanel(
-    tabPanel("Onglet1",
+    tabPanel("Accueil",
              titlePanel("Accueil"),
              
              leafletOutput("map"),
@@ -31,8 +31,14 @@ fluidPage(
                mainPanel(
                  plotOutput("distPlot")
                  )
-              )
+              ) # fermeture sidebarLayout
+    ),# fermeture tabPanel
+    tabPanel("Carte AOP",
+             titlePanel("Carte Intéractive des AOP")
+    ), 
+    tabPanel("About",
+             titlePanel("L'Equipe")
     )
-)
+  )# fermeture tabsetPanel
 
-)
+)# fermeture Fluidpage
