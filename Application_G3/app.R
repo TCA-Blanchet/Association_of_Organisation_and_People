@@ -103,6 +103,18 @@ server <- function(input, output, session) {
     leaflet() %>%
       addTiles(group = "OpenStreetMap") %>%
       addProviderTiles(providers$CartoDB.Positron, group = "CartoDB") %>%
+      addPolygons(data = departements, fillColor = "#95d5a6", fillOpacity = 0.3,
+                  color = "#1fc919", weight = 1,
+                  popup = ~paste0("<strong>", NOM_M, "</strong>"), 
+                  layerId = ~NOM_M,
+                  group = "departements") %>%
+      addCircleMarkers(data = aop_centroides, radius = 6, color = "#0000ff",
+                       fillColor = "#0080ff", fillOpacity = 0.8, weight = 2,
+                       layerId = ~AOP,
+                       popup = ~paste0("<strong>", AOP, "</strong><br>Catégorie: ", 
+                                       categorie, "<br>Communes: ", n_communes),
+                       clusterOptions = markerClusterOptions(),
+                       group = "markers") %>%
       setView(lng = 2.5, lat = 46.5, zoom = 6) %>%
       addLayersControl(baseGroups = c("OpenStreetMap", "CartoDB"),
                        options = layersControlOptions(collapsed = FALSE))
@@ -177,7 +189,25 @@ server <- function(input, output, session) {
       if (nrow(point_aop) == 0) return()
       
       bbox <- st_bbox(communes_aop)
-      marge <- 0.1
+      
+      xmin <- as.numeric(bbox["xmin"])
+      xmax <- as.numeric(bbox["xmax"])
+      ymin <- as.numeric(bbox["ymin"])
+      ymax <- as.numeric(bbox["ymax"])
+      
+      largeur <- xmax - xmin
+      hauteur <- ymax - ymin
+      taille_max <- max(largeur, hauteur)
+      
+      if (taille_max < 0.5) {
+        marge <- 0.5
+      } else if (taille_max < 1) {
+        marge <- 0.3
+      } else if (taille_max < 2) {
+        marge <- 0.15
+      } else {
+        marge <- 0.1
+      }
       
       leafletProxy("carte") %>%
         clearShapes() %>%
@@ -200,8 +230,10 @@ server <- function(input, output, session) {
                          popup = ~paste0("<strong>", AOP, "</strong><br>Catégorie: ", 
                                          categorie, "<br>Communes: ", n_communes),
                          group = "markers") %>%
-        fitBounds(bbox["xmin"] * (1 - marge), bbox["ymin"] * (1 - marge),
-                  bbox["xmax"] * (1 + marge), bbox["ymax"] * (1 + marge))
+        fitBounds(xmin - largeur * marge, 
+                  ymin - hauteur * marge,
+                  xmax + largeur * marge, 
+                  ymax + hauteur * marge)
       return()
     }
     
@@ -280,7 +312,13 @@ server <- function(input, output, session) {
     
     if (!is.null(input$aop_selectionnee) && input$aop_selectionnee != "") {
       aop_info <- aop_communes %>% filter(AOP == input$aop_selectionnee)
+      categorie_aop <- aop_centroides %>% 
+        filter(AOP == input$aop_selectionnee) %>% 
+        pull(categorie) %>% 
+        unique()
+      
       return(paste0("AOP sélectionnée : ", input$aop_selectionnee, "\n",
+                    "Catégorie : ", categorie_aop, "\n",
                     nrow(aop_info), " communes dans ", 
                     length(unique(aop_info$Departement)), " département(s)"))
     }
