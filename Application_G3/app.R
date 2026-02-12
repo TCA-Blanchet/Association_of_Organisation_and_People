@@ -85,7 +85,7 @@ ui <- fluidPage(
                       wellPanel(
                         img(src = "Profil_Julian.png", width = "35%", 
                             style = "border-radius: 50%; object-fit: cover; margin-bottom: 15px"),
-                        h4("Julien"),
+                        h4("Julian"),
                         p("Server Développeur") 
                       )
                ),
@@ -120,11 +120,14 @@ ui <- fluidPage(
              fluidRow(
                column(width = 12,
                       wellPanel(
-                        h2("Titre du  projet : [Saisir le Titre Ici]"),
+                        h2("Association of Organisation and People"),
                         p("Description du projet :"),
                         p("Nous avons choisi de nous pencher sur notre première idée qui est la présentation d'une carte intéractive des différentes AOPs françaises. 
-Pour ce faire nous avons choisi d'utilisé un jeu de donnée .shp comme base de carte afin de n'avoir que les départements et comunnes françaises et non l'entièreté du monde avec openstreet map. Ce jeu de donnée issu de notre travail de 3ème année sous QGIS, nous a fait rencontrer quelques problèmes: Les fichiers étant trop lourds pour gitHub, tibault s'est retrouvé avec un commit qui ne pouvait être push sur le répertoire commun ce qui entraîne un blocage total de la fonction push depuis Rstudio et la suppression de ces documents demandés eux aussi un commit et un push. Pour régler ce problème, il a esseyé d'utiliser l'interface Git Gui pour dé"),
-                        style = "background-color: #f8f9fa; border-left: 5px solid #007bff; text-align: justif"
+Pour ce faire nous avons choisi d'utilisé un jeu de donnée .shp comme base de carte afin de n'avoir que les départements et comunnes françaises et non l'entièreté du 
+                          monde avec openstreet map. Ce jeu de donnée issu de notre travail de 3ème année sous QGIS, nous a fait rencontrer quelques problèmes: Les fichiers
+                          étant trop lourds pour gitHub, tibault s'est retrouvé avec un commit qui ne pouvait être push sur le répertoire commun ce qui entraîne un blocage total de la
+                          fonction push depuis Rstudio et la suppression de ces documents demandés eux aussi un commit et un push. Pour régler ce problème, il a esseyé d'utiliser l'interface Git Gui pour dé", style = "text-align: justify"),
+                        style = "background-color: #f8f9fa; border-left: 5px solid #007bff"
                       )
                )
              )
