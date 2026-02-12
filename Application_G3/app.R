@@ -3,6 +3,7 @@ library(sf)
 library(leaflet)
 library(dplyr)
 library(bslib)
+options(shiny.port=4869)
 
 if (!dir.exists("data/processed")) {
   stop("ERREUR : Le dossier 'data/processed' introuvable.\n",
@@ -116,15 +117,15 @@ ui <- fluidPage(
              
              # Espacement visuel
              fluidRow(column(width = 12, hr())),
-             titlePanel("Histoire du projet"),
              fluidRow(
-               column(12,
-                      p("Nous nous sommes séparé les tâches : Glory sur l'UI pour la page d'accueil et l'onglet de la carte, Kevine sur l'UI de la page About, Julian sur le traitement des données et Tibault en support d'explication pour l'UI et la rédaction/synthétisation du traitement des données. 
-Concernant le traitement des données, nous sommes partie de nos données .shp, nous avons dû avons les transformer géométriquement afin de les passer en WGS 84. Ensuite Julian a fait une jointure gauche entre notre catégorisation des AOPs et notre fichier commune.shp.
-Afin de faciliter la lecture de la carte et de ne pas la surcharger la carte avec les zones géographiques des AOPs, Julian a calculer les centroides de chaque AOPs afin de ne faire apparaître qu'un unique point par AOP. Suite à cela nous avons enregistrer le fruit de nos calculs sur différents fichiers afin ne pas refaire faire les calcules à l'ouverture de l'application mais uniquement de la lecture des résultats.
-
-Glory: sur la partie Ui, j'ai fait une barre déroulante des produits regroupés en 4 catégories: boissons, produits laitiers, produits carnés et autres. J'ai assi fait une déroulante afin de permettre à l'utilisateur de trier par région. J'ai également fait des recherches afin apporter plus de couleurs dans l'interface, mais je n'ai pas encore obtenu des résultats qui marchent.",
-                        style = "text-align: justify; padding: 10px")
+               column(width = 12,
+                      wellPanel(
+                        h2("Titre du  projet : [Saisir le Titre Ici]"),
+                        p("Description du projet :"),
+                        p("Nous avons choisi de nous pencher sur notre première idée qui est la présentation d'une carte intéractive des différentes AOPs françaises. 
+Pour ce faire nous avons choisi d'utilisé un jeu de donnée .shp comme base de carte afin de n'avoir que les départements et comunnes françaises et non l'entièreté du monde avec openstreet map. Ce jeu de donnée issu de notre travail de 3ème année sous QGIS, nous a fait rencontrer quelques problèmes: Les fichiers étant trop lourds pour gitHub, tibault s'est retrouvé avec un commit qui ne pouvait être push sur le répertoire commun ce qui entraîne un blocage total de la fonction push depuis Rstudio et la suppression de ces documents demandés eux aussi un commit et un push. Pour régler ce problème, il a esseyé d'utiliser l'interface Git Gui pour dé"),
+                        style = "background-color: #f8f9fa; border-left: 5px solid #007bff; text-align: justif"
+                      )
                )
              )
              
@@ -357,7 +358,7 @@ server <- function(input, output, session) {
       return(paste0("AOP sélectionnée : ", input$aop_selectionnee, "\n",
                     "Catégorie : ", categorie_aop, "\n",
                     nrow(aop_info), " communes dans ", 
-                    length(unique(aop_info$Departement)), " département(s)"))
+                    length(unique(aop_info$Departement)), " département"))
     }
     
     if (!is.null(input$departement) && input$departement != "") {
