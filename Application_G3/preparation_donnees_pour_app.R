@@ -14,6 +14,13 @@ departements <- st_read("data/carte/DEPARTEMENT.shp", quiet = TRUE) %>%
 aop_data <- read_csv("data/AOP/aop_4_categories.csv", show_col_types = FALSE) %>%
   rename(AOP = 'Aire_geographique')
 
+aop_data <- aop_data %>%
+  mutate(Categorie = case_when(
+    Categorie == "Produit carné" ~ "Produits Carnés",
+    Categorie == "Produit laitier" ~ "Produits Laitiers",
+    TRUE ~ Categorie
+  ))
+
 aop_communes <- aop_data %>%
   left_join(communes, by = c("CI" = "INSEE_COM")) %>%
   filter(!is.na(geometry)) %>%

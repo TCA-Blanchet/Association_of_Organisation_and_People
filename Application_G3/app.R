@@ -151,10 +151,10 @@ h2, h4 {
     tabPanel("Accueil",
              fluidRow(
                column(12, align = "center",
-                      tags$div(style = "margin-top: 30px; margin-bottom: 20px;",
+                      tags$div(style = "margin-top: 20px; margin-bottom: 15px;",
                                tags$h2("Bienvenue sur la Carte des AOP Françaises", 
                                        style = "color: #9A2A56; font-weight: 600;"),
-                               tags$p(style = "font-size: 18px; color: #666; margin-top: 10px;",
+                               tags$p(style = "font-size: 18px; color: #666; margin-top: 5px;",
                                       "Explorez le patrimoine gastronomique français")
                       )
                )
@@ -252,7 +252,7 @@ h2, h4 {
              ),
              
              fluidRow(
-               column(12, align = "center", style = "margin-top: 25px; margin-bottom: 30px;",
+               column(12, align = "center", style = "margin-top: 15px; margin-bottom: 20px;",
                       actionButton("go", "Voir toutes les AOP", 
                                    style = "background-color: #9A2A56; 
                                        color: white; 
