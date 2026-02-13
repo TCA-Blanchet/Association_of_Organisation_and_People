@@ -45,8 +45,6 @@ total_apres <- file.info("data/processed/communes_light.rds")$size/1024^2 +
   file.info("data/processed/aop_communes.rds")$size/1024^2 +
   file.info("data/processed/aop_centroides.rds")$size/1024^2
 
-cat("\n======================================\n")
 cat("TOTAL AVANT:", round(total_avant, 2), "MB\n")
 cat("TOTAL APRÈS:", round(total_apres, 2), "MB\n")
 cat("GAIN:", round((1 - total_apres/total_avant) * 100, 1), "%\n")
-cat("======================================\n")
